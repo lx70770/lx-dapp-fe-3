@@ -1,6 +1,4 @@
 import { defineConfig } from 'umi'
-console.log(12345);
-console.log(process.env.UMI_ENV);
 
 export default defineConfig({
   define: {
