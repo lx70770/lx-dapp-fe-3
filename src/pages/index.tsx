@@ -52,7 +52,7 @@ const App: React.FC = () => {
         <div className={styles.content}>
           <div className={styles.title}>prophet-&#947;</div>
           <div className={styles.tip}>
-            prophet-gamma is a new colection of <br /> 999 nfts hand drawn by a athulhu artist, <br /> each one is aunipue and beautiful work of art.
+            prophet-gamma is a new colection of <br /> 999 nfts hand drawn by a cthulhu artist, <br /> each one is aunipue and beautiful work of art.
           </div>
         </div>
         <img className={styles.human} src={Human}></img>
