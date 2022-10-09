@@ -45,6 +45,7 @@
 
         .mint {
             margin: 0 auto;
+            margin-top: 20px;
             display: flex;
             flex-flow: row nowrap;
             justify-content: center;
@@ -52,10 +53,36 @@
 
             .button {
                 color: #fff;
-                font-size: 58px;
+                height: 54px;
+                width: 120px;
+                line-height: 45px;
+                font-size: 50px;
                 text-align: center;
                 font-family: 'asphyxiate';
                 cursor: pointer;
+                position: relative;
+
+                .borL {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    border-left: 1px #fff solid;
+                    border-top: 1px #fff solid;
+                    border-bottom: 1px #fff solid;
+                    width: 10px;
+                }
+
+                .borR {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    border-right: 1px #fff solid;
+                    border-top: 1px #fff solid;
+                    border-bottom: 1px #fff solid;
+                    width: 10px;
+                }
             }
 
             .span {

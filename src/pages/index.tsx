@@ -39,7 +39,7 @@ const App: React.FC = () => {
     }
 
     if (Number(balance) > 0) {
-      error('You already own an NFT')
+      error('Each wallet can only mint once')
       return
     }
     mint(account)
@@ -52,7 +52,7 @@ const App: React.FC = () => {
         <div className={styles.content}>
           <div className={styles.title}>prophet-&#947;</div>
           <div className={styles.tip}>
-            prophet-gamma is a new colection of <br /> 999 nfts hand drawn by a cthulhu artist, <br /> each one is aunipue and beautiful work of art.
+            prophet-gamma is a new colection of <br /> 899 nfts hand drawn by a cthulhu artist, <br /> each one is aunipue and beautiful work of art.
           </div>
         </div>
         <img className={styles.human} src={Human}></img>
@@ -61,7 +61,9 @@ const App: React.FC = () => {
           <div className={styles.span}></div>
           <div className={styles.span}></div>
           <div className={styles.button} onClick={firstButton}>
+            <div className={styles.borL}></div>
             mint
+            <div className={styles.borR}></div>
           </div>
           <div className={styles.span}></div>
           <div className={styles.span}></div>
