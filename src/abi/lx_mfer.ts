@@ -6,6 +6,11 @@ export default [
         name: '_maxSupply',
         type: 'uint256',
       },
+      {
+        internalType: 'string',
+        name: '_baseTokenURI',
+        type: 'string',
+      },
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
@@ -158,25 +163,6 @@ export default [
     inputs: [
       {
         internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'getAirdropList',
-    outputs: [
-      {
-        internalType: 'address[]',
-        name: '',
-        type: 'address[]',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
         name: 'tokenId',
         type: 'uint256',
       },
@@ -239,7 +225,7 @@ export default [
     ],
     name: 'mint',
     outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'payable',
     type: 'function',
   },
   {
