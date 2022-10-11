@@ -60,15 +60,15 @@ const App: React.FC = () => {
         <div className={styles.mint}>
           <div className={styles.span}></div>
           <div className={styles.span}></div>
-          <div className={styles.button} onClick={firstButton}>
+          <div className={styles.button}>
             <div className={styles.borL}></div>
-            mint
+            sold out
             <div className={styles.borR}></div>
           </div>
           <div className={styles.span}></div>
           <div className={styles.span}></div>
         </div>
-        <div className={styles.total}>{totalSupply}/899</div>
+        <div className={styles.total}>899/899</div>
         <div className={styles.social}>
           <div className={styles.span}></div>
           <div className={styles.span}></div>
