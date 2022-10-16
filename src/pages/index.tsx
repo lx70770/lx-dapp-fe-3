@@ -1,5 +1,5 @@
 import ConnectWalletBtn from '@/components/connect-wallet-btn'
-import { useLXMFERInfo } from '@/hooks/useLXMFERContract'
+import { useLXStep2Info } from '@/hooks/useLXStep2Contract'
 import useWallet from '@/hooks/useWallet'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { message } from 'antd'
@@ -10,7 +10,7 @@ import useNotify from '@/hooks/useNotify'
 
 const App: React.FC = () => {
   const { account, isActive, isActiviting, connect, isNetworkNotSupport } = useWallet()
-  const { loading, mintLoading, mint, balance, totalSupply } = useLXMFERInfo()
+  const { loading, mintLoading, mint, balance, totalSupply } = useLXStep2Info()
   const { error } = useNotify()
 
   const connectWallet = () => {
@@ -22,7 +22,7 @@ const App: React.FC = () => {
   }
 
   const firstButton = () => {
-    if (isActiviting || loading) {
+    if (isActiviting || loading || mintLoading) {
       error('please wait a moment.')
       return
     }
@@ -38,8 +38,13 @@ const App: React.FC = () => {
       return
     }
 
-    if (Number(balance) > 0) {
-      error('Each wallet can only mint once')
+    if (Number(totalSupply) >= 899) {
+      error('Sold out.')
+      return
+    }
+
+    if (Number(balance) >= 5) {
+      error('Each wallet can only mint 5 times.')
       return
     }
     mint(account)
@@ -52,23 +57,27 @@ const App: React.FC = () => {
         <div className={styles.content}>
           <div className={styles.title}>prophet-&#947;</div>
           <div className={styles.tip}>
-            prophet -gamma is a new collection of <br /> 899 nfts hand drawn by Cthulhu Artists, <br /> each one is a unique and beautiful work of art.
+            Prophet Gamma Game Cards <br />
+            are game character cards that come with <br />
+            Prophet gamma nfts, containing a total of <br />
+            899 cards created by the great Cthulhu artists. <br />
+            They are a harbinger of the future of mankind.
           </div>
         </div>
         <img className={styles.human} src={Human}></img>
-        <div className={styles.price}>1-400 free || 401-899: 0.006eth</div>
+        <div className={styles.price}>holder of Prophetgamma: freemint || public sale: 0.006eth</div>
         <div className={styles.mint}>
           <div className={styles.span}></div>
           <div className={styles.span}></div>
-          <div className={styles.button}>
+          <div className={styles.button} onClick={firstButton}>
             <div className={styles.borL}></div>
-            sold out
+            mint
             <div className={styles.borR}></div>
           </div>
           <div className={styles.span}></div>
           <div className={styles.span}></div>
         </div>
-        <div className={styles.total}>899/899</div>
+        <div className={styles.total}>{totalSupply}/899</div>
         <div className={styles.social}>
           <div className={styles.span}></div>
           <div className={styles.span}></div>

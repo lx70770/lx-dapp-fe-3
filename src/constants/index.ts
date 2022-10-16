@@ -27,9 +27,12 @@ const ethParams: AddEthereumChainParameter = {
   blockExplorerUrls: ['https://etherscan.io'],
 }
 
-export const LX_MFER_ADDRESS = '0x6ae978e0c8466eb5371592b1870bacc36bdbf163'
+export const LX_MFER_ADDRESS = '0x6Ae978e0C8466eB5371592b1870bACc36Bdbf163'
+
+export const LX_STEP2_ADDRESS = '0x97a70f7102c89c772d18273ac35455a5b3945593'
 
 export const isProd = ENV === 'prod'
 
 export const CURRENT_NEED_NETWORK = isProd ? ETH_MAINNET_CHAIN_ID : ETH_TEST_CHAIN_ID
+
 export const CURRENT_NEED_NETWORK_PARAMS = isProd ? ethParams : goerliParams

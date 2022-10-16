@@ -1,10 +1,11 @@
 import { etherToWei } from '@/utils/format_bignumber'
 import { useEffect, useState } from 'react'
-import { makeLXMFERContract } from '../utils/make_contract'
+import { makeLXMFERContract, makeStep2Contract } from '../utils/make_contract'
+import { ContractTransaction } from 'ethers'
 import useNotify from './useNotify'
 import useWallet from './useWallet'
 
-export function useLXMFERInfo() {
+export function useLXStep2Info() {
   const { provider, account } = useWallet()
   const [loading, setLoading] = useState(false)
   const [mintLoading, setMintLoading] = useState(false)
@@ -15,12 +16,14 @@ export function useLXMFERInfo() {
   async function getLXStapOneInfo() {
     try {
       setLoading(true)
-      const contract = makeLXMFERContract(provider!, account)
+      const contract = makeStep2Contract(provider!, account)
 
       const balance = await contract.balanceOf(account)
       const totalSupply = await contract.totalSupply()
       setBalance(balance.toString())
       setTotalSupply(totalSupply.toString())
+      console.log(balance.toString())
+      console.log(totalSupply.toString())
     } catch (e: any) {
       console.error('get info failed', e.message)
     } finally {
@@ -37,7 +40,7 @@ export function useLXMFERInfo() {
   useEffect(() => {
     if (!(account && provider)) return
 
-    const contract = makeLXMFERContract(provider, account)
+    const contract = makeStep2Contract(provider, account)
     const fromMe = contract.filters.Transfer(null, account)
 
     contract.on(fromMe, (from, to, amount, event) => {
@@ -52,12 +55,28 @@ export function useLXMFERInfo() {
   async function mint(address: string) {
     try {
       setMintLoading(true)
-      const contract = makeLXMFERContract(provider!, account)
+      const contract = makeStep2Contract(provider!, account)
+      const contract1 = makeLXMFERContract(provider!, account)
       error('Start mint, please wait a moment.')
-      const totalSupply = await contract.totalSupply()
-      const tx = await contract.mint(address, {
-        value: totalSupply.toNumber() > 400 ? etherToWei('0.006') : etherToWei('0'),
-      })
+      const pgBalance = (await contract1.balanceOf(account)).toNumber()
+      console.log('pgBalance:', pgBalance)
+      console.log('balance:', balance)
+
+      let tx: ContractTransaction
+      if (pgBalance <= 0) {
+        tx = await contract.mint(address, {
+          value: etherToWei('0.006'),
+        })
+      } else if (pgBalance > 0 && Number(balance) >= 1) {
+        tx = await contract.mint(address, {
+          value: etherToWei('0.006'),
+        })
+      } else {
+        tx = await contract.mint(address, {
+          value: etherToWei('0'),
+        })
+      }
+
       const result = await tx.wait()
       error(`mint successfully`)
     } catch (e: any) {
